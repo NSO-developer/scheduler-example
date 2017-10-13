@@ -1,7 +1,9 @@
 # scheduler-example
 A quick hack to add a scheduler to your service, it kind misuses the new scheduler that was added to NSO 4.5. Its more of a hack than something for production use as it has a "few" shortcomings like doesnt actually care about years or seconds, doesnt remove the scheduler after it fired etc.
 
-its a full runtime folder.
+Its a full runtime folder.
+
+
 ```
 11:53 $ make all start
 ncs-netsim start
@@ -120,3 +122,7 @@ c0-hostname  2017-10-13 11:58:00.827042
 
 [ok][2017-10-13 11:59:18]
 ```
+
+### Contact
+
+Contact Hakan Niska <hniska@cisco.com> with any suggestions or comments. If you find any bugs please fix them and send me a pull request.
