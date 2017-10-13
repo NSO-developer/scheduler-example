@@ -1,8 +1,9 @@
 # scheduler-example
-A quick hack to add a scheduler to your service, its a full runtime folder
+A quick hack to add a scheduler to your service, it kind misuses the new scheduler that was added to NSO 4.5. Its more of a hack than something for production use as it has a "few" shortcomings like doesnt actually care about years or seconds, doesnt remove the scheduler after it fired etc.
 
+its a full runtime folder.
 ```
-11:53 $ make all staert
+11:53 $ make all start
 ncs-netsim start
 DEVICE c0 OK STARTED
 ncs
