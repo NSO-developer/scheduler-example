@@ -1,0 +1,22 @@
+<config-template xmlns="http://tail-f.com/ns/config/1.0">
+
+  <!-- Scheduler -->
+  <scheduler xmlns="http://tail-f.com/ns/ncs-scheduler" when="{/schedule/run-at}">
+  <task>
+    <name>{/name}-{/schedule/run-at}</name>
+    <schedule>{$MINUTE} {$HOUR} {$DAY} {$MONTH} *</schedule>
+    <action-node xmlns:schedule="http://example.com/sethostname">{$SERVICEXPATH}</action-node>
+    <action-name>re-deploy</action-name>
+  </task>
+  </scheduler>
+
+  <!-- Service -->
+   <devices xmlns="http://tail-f.com/ns/ncs" when="{$SERVICEACTIVE}">
+     <device>
+       <name>{/device}</name>
+       <config>
+        <hostname xmlns="urn:ios">{/name}</hostname>
+       </config>
+     </device>
+   </devices>
+</config-template>

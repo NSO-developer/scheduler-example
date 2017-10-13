@@ -1,0 +1,68 @@
+module sethostname {
+
+  namespace "http://example.com/sethostname";
+  prefix sethostname;
+
+  import ietf-inet-types {
+    prefix inet;
+  }
+  import tailf-common {
+    prefix tailf;
+  }
+  import tailf-ncs {
+    prefix ncs;
+  }
+
+  description
+    "Example service that uses the NSO internal scheduler
+     to schedule service activation";
+
+  revision 2017-10-13 {
+    description
+      "Initial revision.
+       hniska@cisco.com";
+  }
+
+  list sethostname {
+    description "Service that sets the hostname";
+
+    key name;
+    leaf name {
+      tailf:info "Unique service id";
+      tailf:cli-allow-range;
+      type string;
+    }
+
+    uses ncs:service-data;
+    ncs:servicepoint sethostname-servicepoint;
+
+
+    leaf device {
+      type leafref {
+        path "/ncs:devices/ncs:device/ncs:name";
+      }
+    }
+
+    //Scheduler YANG
+    container schedule {
+      leaf run-at {
+          type string {
+            pattern '\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}';
+          }
+          tailf:info "format: YYYY-MM-DDTHH:MM:SS";
+          description "format: YYYY-MM-DDTHH:MM:SS";
+      }
+      leaf service-active {
+          type empty;
+      }
+      leaf activation-time {
+          type string;
+          config false;
+          tailf:cdb-oper {
+            tailf:persistent true;
+          }
+      }
+    }
+
+  }
+}
