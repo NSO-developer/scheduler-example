@@ -33,8 +33,7 @@ class ServiceCallbacks(Service):
         if service.schedule.run_at:
             activation_time = datetime.strptime(service.schedule.run_at, '%Y-%m-%dT%H:%M:%S')
             #Check if activation time is passed
-            #why < and not >, no idea :(
-            if activation_time < now:
+            if now > activation_time:
                 print('Service active now: ' + str(now) + ' activation time: ' + str(activation_time))
                 vars.add('SERVICEACTIVE','TRUE')
                 service.schedule.activation_time = str(now)
