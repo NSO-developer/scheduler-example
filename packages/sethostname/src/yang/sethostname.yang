@@ -52,9 +52,6 @@ module sethostname {
           tailf:info "format: YYYY-MM-DDTHH:MM:SS";
           description "format: YYYY-MM-DDTHH:MM:SS";
       }
-      leaf service-active {
-          type empty;
-      }
       leaf activation-time {
           type string;
           config false;
@@ -62,7 +59,24 @@ module sethostname {
             tailf:persistent true;
           }
       }
-    }
+      tailf:action clean-old-schedules {
+        tailf:actionpoint schedulecleanup;
+        input {
+          leaf weeks {
+            type uint8;
+          }
+          leaf dry-run {
+              type empty;
+          }
 
+        }
+        output {
+          leaf result {
+            type string;
+          }
+        }
+      }
+    }
   }
+
 }
